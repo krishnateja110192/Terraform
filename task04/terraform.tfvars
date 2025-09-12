@@ -11,6 +11,9 @@ vm_sku              = "Standard_F2s_v2"
 vm_os_version       = "ubuntu-24_04-lts"
 nsg_rule_http       = "AllowHTTP"
 nsg_rule_ssh        = "AllowSSH"
+nic_ip_config_name  = "internal"
+admin_username      = "azureuser"
+
 
 
 tags = {

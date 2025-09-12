@@ -64,3 +64,11 @@ variable "nsg_rule_ssh" {
   description = "Name of the NSG rule to allow SSH traffic"
   type        = string
 }
+variable "nic_ip_config_name" {
+  description = "Name of the IP configuration for the network interface"
+  type        = string
+}
+variable "admin_username" {
+  description = "Admin username for the virtual machine"
+  type        = string
+}
