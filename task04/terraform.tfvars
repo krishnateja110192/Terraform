@@ -9,8 +9,8 @@ dns_label           = "cmaz-ey1bz94q-mod4-nginx"
 vm_name             = "cmaz-ey1bz94q-mod4-vm"
 vm_sku              = "Standard_F2s_v2"
 vm_os_version       = "ubuntu-24_04-lts"
-nsg_rule_http = "AllowHTTP"
-nsg_rule_ssh  = "AllowSSH"
+nsg_rule_http       = "AllowHTTP"
+nsg_rule_ssh        = "AllowSSH"
 
 
 tags = {
