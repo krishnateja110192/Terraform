@@ -55,3 +55,12 @@ variable "vm_os_version" {
   type        = string
   description = "OS version for the virtual machine"
 }
+variable "nsg_rule_http" {
+  description = "Name of the NSG rule to allow HTTP traffic"
+  type        = string
+}
+
+variable "nsg_rule_ssh" {
+  description = "Name of the NSG rule to allow SSH traffic"
+  type        = string
+}
