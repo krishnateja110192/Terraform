@@ -7,7 +7,6 @@ resource "azurerm_windows_web_app" "main" {
 
   site_config {
     always_on                     = true
-    health_check_path             = "/index.html"
     ip_restriction_default_action = "Deny"
 
     dynamic "ip_restriction" {
@@ -22,8 +21,4 @@ resource "azurerm_windows_web_app" "main" {
     }
   }
 
-
-  app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE" = "1"
-  }
 }
