@@ -10,26 +10,7 @@ locals {
   rg_details  = var.resource_groups
   asp_details = var.app_service_plans
   app_details = var.app_services
-
-  #Consolidate IP restriction rules to be passed to each App Service module.
-  ip_restriction_rules = [
-    {
-      name        = "allow-ip"
-      priority    = 100
-      action      = "Allow"
-      ip_address  = "${var.verification_agent_ip}/32"
-      service_tag = null
-    },
-    {
-      name        = "allow-tm"
-      priority    = 200
-      action      = "Allow"
-      ip_address  = null
-      service_tag = "AzureTrafficManager"
-    }
-  ]
 }
-
 #--- Resource Groups Module ---
 #Create all resource groups using the resource_group module and for_each.
 module "resource_group" {
@@ -63,7 +44,7 @@ module "app_service" {
   location            = module.resource_group[each.value.location_key].location
   resource_group_name = module.resource_group[each.value.location_key].name
   app_service_plan_id = module.app_service_plan[each.value.app_service_plan_key].id
-  ip_restrictions     = local.ip_restriction_rules
+  ip_restrictions     = var.ip_restriction_rules
   tags                = var.common_tags
 }
 

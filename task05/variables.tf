@@ -50,3 +50,14 @@ variable "common_tags" {
   type        = map(string)
   description = "Tags to apply to all resources."
 }
+
+variable "ip_restriction_rules" {
+  type = list(object({
+    name        = string
+    priority    = number
+    action      = string
+    ip_address  = string
+    service_tag = string
+  }))
+  description = "A list of IP restriction rules for the web app."
+}

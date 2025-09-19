@@ -59,3 +59,20 @@ verification_agent_ip = "18.153.146.156"
 common_tags = {
   Creator = "krishnateja_samudrala@epam.com"
 }
+
+ip_restriction_rules = [
+  {
+    name        = "allow-ip"
+    priority    = 100
+    action      = "Allow"
+    ip_address  = "18.153.146.156/32"
+    service_tag = null
+  },
+  {
+    name        = "allow-tm"
+    priority    = 200
+    action      = "Allow"
+    ip_address  = null
+    service_tag = "AzureTrafficManager"
+  }
+]
