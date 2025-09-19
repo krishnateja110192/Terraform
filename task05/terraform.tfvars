@@ -13,7 +13,6 @@ resource_groups = {
   }
 }
 
-#App Service Plan parameters.
 app_service_plans = {
   asp1 = {
     name         = "cmaz-ey1bz94q-mod5-asp-01"
@@ -31,7 +30,6 @@ app_service_plans = {
   }
 }
 
-#App Service parameters.
 app_services = {
   app1 = {
     name                 = "cmaz-ey1bz94q-mod5-app-01"
@@ -45,20 +43,17 @@ app_services = {
   }
 }
 
-#Traffic Manager profile parameters.
 traffic_manager_profile = {
   name               = "cmaz-ey1bz94q-mod5-traf"
   resource_group_key = "rg3"
   routing_method     = "Performance"
 }
 
-#Verification agent IP address.
-verification_agent_ip = "18.153.146.156"
-
-#Common tags.
 common_tags = {
   Creator = "krishnateja_samudrala@epam.com"
 }
+
+verification_agent_ip = "18.153.146.156"
 
 ip_restriction_rules = [
   {
