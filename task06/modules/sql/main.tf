@@ -67,12 +67,5 @@ resource "azurerm_mssql_firewall_rule" "verification_ip_rule" {
   end_ip_address   = var.verification_ip
 }
 
-resource "azurerm_mssql_firewall_rule" "local_ip_rule" {
-  name             = var.local_ip_name
-  server_id        = azurerm_mssql_server.sql_server.id
-  start_ip_address = var.local_ip_address
-  end_ip_address   = var.local_ip_address
-}
-
 
 

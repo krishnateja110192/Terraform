@@ -10,9 +10,6 @@ sql_db_sku                    = "S2"
 app_service_plan_sku          = "P0v3"
 app_service_os                = "Linux"
 webapp_dotnet_version         = "8.0"
-local_ip_address              = "152.59.199.173"
-local_ip_name                 = "allow-local-ip"
-
 
 
 tags = {

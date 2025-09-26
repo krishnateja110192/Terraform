@@ -75,13 +75,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-variable "local_ip_name" {
-  description = "Name of the firewall rule for local IP access"
-  type        = string
-  default     = "allow-local-ip"
-}
-
-variable "local_ip_address" {
-  description = "Public IP address to allow access to SQL Server from local machine"
-  type        = string
-}

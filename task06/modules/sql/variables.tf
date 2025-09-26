@@ -62,13 +62,4 @@ variable "tags" {
   description = "Tags to apply to all resources."
   type        = map(string)
 }
-variable "local_ip_address" {
-  description = "Public IP address to allow access to SQL Server from local machine"
-  type        = string
-}
-
-variable "local_ip_name" {
-  description = "Name of the firewall rule for local IP access"
-  type        = string
-}
 

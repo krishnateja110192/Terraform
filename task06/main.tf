@@ -37,8 +37,6 @@ module "sql" {
   verification_ip               = var.allowed_ip_address
   sql_azure_fw_rule_name        = var.sql_azure_fw_rule_name
   sql_verification_fw_rule_name = var.sql_verification_fw_rule_name
-  local_ip_name                 = var.local_ip_name
-  local_ip_address              = var.local_ip_address
   tags                          = var.tags
 }
 
