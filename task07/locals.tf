@@ -15,8 +15,5 @@ locals {
 
   # task07/locals.tf (UPDATED)
 
-  # New locals for the imported resource IDs, required for the import block
-  imported_resource_group_id  = var.resource_group_id
-  imported_storage_account_id = var.storage_account_id
 
 }

@@ -6,13 +6,14 @@
 import {
   to = azurerm_resource_group.rg
   # FIX: Use a local value instead of var.*
-  id = local.imported_resource_group_id
+  id = "/subscriptions/cc7ea49d-2277-4c78-bba6-063045232ca6/resourceGroups/cmtr-ey1bz94q-mod7-rg"
 }
 
 import {
   to = azurerm_storage_account.sa
   # FIX: Use a local value instead of var.*
-  id = local.imported_storage_account_id
+  id = "/subscriptions/cc7ea49d-2277-4c78-bba6-063045232ca6/resourceGroups/cmtr-ey1bz94q-md7-rg/providers/Microsoft.Storage/storageAccounts/cmtrey1bz94qmod7sa"
+
 }
 
 # -----------------------------------------------------------------------------
