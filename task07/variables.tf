@@ -31,6 +31,5 @@ variable "cdn_profile_sku" {
 variable "common_tags" {
   description = "A map of common tags to apply to all resources."
   type        = map(string)
-  default     = {}
 
 }
