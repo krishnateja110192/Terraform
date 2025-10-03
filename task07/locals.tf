@@ -13,7 +13,12 @@ locals {
   cdn_origin_name       = format("%s-fd-origin", local.base)
   cdn_route_name        = "default" # Use the fixed name from the task parameters
 
-  # task07/locals.tf (UPDATED)
 
+  common_tags = merge(
+    {
+      "Creator" = "krishnateja_samudrala@epam.com"
+    },
+    var.common_tags
+  )
 
 }

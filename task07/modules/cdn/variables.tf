@@ -47,3 +47,7 @@ variable "blob_path" {
   description = "The path to the blob file to be served (e.g., /blob.txt)."
   type        = string
 }
+variable "common_tags" {
+  description = "A map of tags to apply to the CDN Front Door Profile."
+  type        = map(string)
+}

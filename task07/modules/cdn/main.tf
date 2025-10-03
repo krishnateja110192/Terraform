@@ -5,6 +5,7 @@ resource "azurerm_cdn_frontdoor_profile" "profile" {
   name                = var.cdn_profile_name
   resource_group_name = var.resource_group_name
   sku_name            = var.cdn_profile_sku
+  tags                = var.common_tags
 }
 
 # -----------------------------------------------------------------------------
