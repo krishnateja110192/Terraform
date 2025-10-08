@@ -18,7 +18,7 @@ resource "azurerm_container_registry_task" "build_and_push" {
   docker_step {
     # Git context with branch and subfolder
     context_path         = "https://github.com/krishnateja110192/Terraform#main:task08/application"
-    context_access_token = var.git_pat
+    context_access_token = var.context_access_token
     dockerfile_path      = "Dockerfile"
     image_names          = ["${var.image_name}:${var.image_tag}"]
     push_enabled         = true
@@ -33,7 +33,7 @@ resource "azurerm_container_registry_task" "build_and_push" {
     events         = ["commit"]
 
     authentication {
-      token      = var.git_pat
+      token      = var.context_access_token
       token_type = "PAT"
     }
   }
