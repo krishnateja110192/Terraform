@@ -40,6 +40,7 @@ provider "kubectl" {
   client_certificate     = base64decode(module.aks.kube_config.client_certificate)
   client_key             = base64decode(module.aks.kube_config.client_key)
   load_config_file       = false
+  apply_retry_count      = 10
 }
 
 provider "azapi" {
