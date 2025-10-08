@@ -38,7 +38,7 @@ variable "source_context" {
   type        = string
 }
 
-variable "git_pat" {
+variable "context_access_token" {
   description = "Personal Access Token for Git repo access."
   type        = string
   sensitive   = true
