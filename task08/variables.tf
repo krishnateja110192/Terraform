@@ -13,7 +13,7 @@ variable "common_tags" {
   type        = map(string)
 }
 
-variable "context_access_token" {
+variable "git_pat" {
   description = "Personal Access Token for the Git repository containing the application source code."
   type        = string
   sensitive   = true

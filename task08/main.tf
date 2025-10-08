@@ -44,7 +44,7 @@ module "acr" {
   image_name           = local.acr_image_name
   image_tag            = var.acr_image_tag
   source_context       = "https://github.com/krishnateja110192/Terraform.git" # Example URL
-  context_access_token = var.context_access_token
+  context_access_token = var.git_pat
   dockerfile_path      = "task08/application/Dockerfile"
   repository_url       = var.repository_url
 }
