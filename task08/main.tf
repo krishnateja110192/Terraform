@@ -43,9 +43,9 @@ module "acr" {
   tags                 = var.common_tags
   image_name           = local.acr_image_name
   image_tag            = var.acr_image_tag
-  source_context       = "https://github.com/Azure-Samples/aci-helloworld.git" # Example URL
-  context_access_token = var.git_pat
-  dockerfile_path      = "application/Dockerfile"
+  source_context       = "https://github.com/krishnateja110192/Terraform.git" # Example URL
+  context_access_token = var.context_access_token
+  dockerfile_path      = "task08/application/Dockerfile"
   repository_url       = var.repository_url
 }
 
@@ -76,17 +76,18 @@ module "aci" {
 
 # 5. Azure Kubernetes Service (AKS)
 module "aks" {
-  source                         = "./modules/aks"
-  resource_group_name            = azurerm_resource_group.main.name
-  location                       = azurerm_resource_group.main.location
-  aks_name                       = local.aks_name
-  tags                           = var.common_tags
-  default_node_pool_name         = local.aks_default_node_pool.name
-  default_node_pool_count        = local.aks_default_node_pool.count
-  default_node_pool_vm_size      = local.aks_default_node_pool.vm_size
-  default_node_pool_os_disk_type = local.aks_default_node_pool.os_disk_type
-  acr_id                         = module.acr.acr_id
-  key_vault_id                   = module.keyvault.key_vault_id
+  source                            = "./modules/aks"
+  resource_group_name               = azurerm_resource_group.main.name
+  location                          = azurerm_resource_group.main.location
+  aks_name                          = local.aks_name
+  tags                              = var.common_tags
+  default_node_pool_name            = local.aks_default_node_pool.name
+  default_node_pool_count           = local.aks_default_node_pool.count
+  default_node_pool_vm_size         = local.aks_default_node_pool.vm_size
+  default_node_pool_os_disk_type    = local.aks_default_node_pool.os_disk_type
+  default_node_pool_os_disk_size_gb = local.aks_default_node_pool.os_disk_size_gb
+  acr_id                            = module.acr.acr_id
+  key_vault_id                      = module.keyvault.key_vault_id
 
   depends_on = [
     module.acr,
@@ -94,11 +95,10 @@ module "aks" {
   ]
 }
 
-# 6. Kubernetes Deployments (using kubectl provider alias 'aks_kubectl')
 resource "kubectl_manifest" "secret_provider_class" {
   provider = kubectl.aks_kubectl
   yaml_body = templatefile("${local.k8s_manifests_path}/secret-provider.yaml.tftpl", {
-    aks_kv_access_identity_id  = module.aks.kubelet_identity_id
+    aks_kv_access_identity_id  = module.aks.kubelet_identity_client_id
     kv_name                    = module.keyvault.key_vault_name
     redis_url_secret_name      = local.redis_hostname_secret_name
     redis_password_secret_name = local.redis_primary_key_secret_name
@@ -114,7 +114,6 @@ resource "kubectl_manifest" "deployment" {
     app_image_name   = local.acr_image_name
     image_tag        = var.acr_image_tag
   })
-
   wait_for {
     field {
       key   = "status.availableReplicas"
@@ -127,7 +126,6 @@ resource "kubectl_manifest" "deployment" {
 resource "kubectl_manifest" "service" {
   provider  = kubectl.aks_kubectl
   yaml_body = file("${local.k8s_manifests_path}/service.yaml")
-
   wait_for {
     field {
       key        = "status.loadBalancer.ingress.[0].ip"
@@ -138,13 +136,9 @@ resource "kubectl_manifest" "service" {
   depends_on = [kubectl_manifest.deployment]
 }
 
-# Data source to retrieve the created LoadBalancer IP
 data "kubernetes_service" "app_service" {
   depends_on = [kubectl_manifest.service]
-  metadata {
-    name = "redis-flask-app-service"
-    # Namespace is typically "default", but not required if it's the default namespace
-  }
+  metadata { name = "redis-flask-app-service" }
 }
 
 # Azure Client Configuration Data Source

@@ -10,9 +10,12 @@ terraform {
       version = ">= 2.23.0"
     }
     kubectl = {
-      source = "alekc/kubectl"
-      # Change the constraint from >= 3.0.0
-      version = "~> 2.1.3" # This allows any 2.x version
+      source  = "alekc/kubectl" # maintained fork of gavinbunney/kubectl
+      version = "~> 2.1.3"
+    }
+    azapi = {
+      source  = "Azure/azapi"
+      version = "~> 2.6"
     }
   }
 }
@@ -21,20 +24,24 @@ provider "azurerm" {
   features {}
 }
 
+# HashiCorp Kubernetes provider uses the AKS kube_config fields
 provider "kubernetes" {
   host                   = module.aks.kube_config.host
+  cluster_ca_certificate = base64decode(module.aks.kube_config.cluster_ca_certificate)
   client_certificate     = base64decode(module.aks.kube_config.client_certificate)
   client_key             = base64decode(module.aks.kube_config.client_key)
-  cluster_ca_certificate = base64decode(module.aks.kube_config.cluster_ca_certificate)
 }
 
+# Kubectl provider: explicitly disable loading any local kubeconfig to avoid localhost fallback
 provider "kubectl" {
+  alias                  = "aks_kubectl"
   host                   = module.aks.kube_config.host
+  cluster_ca_certificate = base64decode(module.aks.kube_config.cluster_ca_certificate)
   client_certificate     = base64decode(module.aks.kube_config.client_certificate)
   client_key             = base64decode(module.aks.kube_config.client_key)
-  cluster_ca_certificate = base64decode(module.aks.kube_config.cluster_ca_certificate)
-  # Explicitly set the provider to depend on the AKS module to ensure ordering
-  alias = "aks_kubectl"
+  load_config_file       = false
+}
 
-  # The kubectl provider can't use depends_on within its block, but the module call in main.tf will handle the overall dependency.
+provider "azapi" {
+  skip_provider_registration = false
 }

@@ -34,6 +34,7 @@ resource "azurerm_container_group" "main" {
       CREATOR        = var.creator
       REDIS_PORT     = var.redis_port
       REDIS_SSL_MODE = var.redis_ssl_mode
+      PORT           = "8080"
     }
 
     # Secure Environment Variables from Key Vault

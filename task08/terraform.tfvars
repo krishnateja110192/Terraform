@@ -5,5 +5,5 @@ common_tags = {
 }
 acr_image_tag = "v1.0.0"
 # git_pat must be entered manually or provided via other means for security.
-repository_url = "https://github.com/Azure-Samples/aci-helloworld.git"
-git_pat        = ""
+# git_pat = "..."
+repository_url       = "https://github.com/krishnateja110192/Terraform.git"

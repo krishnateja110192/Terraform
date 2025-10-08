@@ -8,41 +8,32 @@ resource "azurerm_container_registry" "main" {
 }
 
 resource "azurerm_container_registry_task" "build_and_push" {
-  name                   = "build-${var.image_name}"
-  container_registry_id  = azurerm_container_registry.main.id
+  name                  = "build-${var.image_name}"
+  container_registry_id = azurerm_container_registry.main.id
 
-  platform { os = "Linux" }
-
-  # Optional, if your ACR has a pool named "default"
-  #agent_pool_name = "default"
+  platform {
+    os = "Linux"
+  }
 
   docker_step {
-    # Git context WITH optional branch/subfolder fragment
-    #   e.g., https://github.com/org/repo#main:app
-    context_path         = var.source_context
-
-    # REQUIRED when context_path is a URL (Git PAT or SAS)
+    # Git context with branch and subfolder
+    context_path         = "https://github.com/krishnateja110192/Terraform#main:task08/application"
     context_access_token = var.context_access_token
-
-    dockerfile_path      = var.dockerfile_path
-    image_names          = ["${var.image_name}:${var.image_tag}"]  # keep lowercase
+    dockerfile_path      = "Dockerfile"
+    image_names          = ["${var.image_name}:${var.image_tag}"]
     push_enabled         = true
   }
 
   source_trigger {
-    name           = "git-trigger"
-    source_type    = "Github"
+    name        = "git-trigger"
+    source_type = "Github"
 
-    # Base repo URL ONLY (NO #branch:folder)
-    #   e.g., https://github.com/org/repo
-    repository_url = var.repository_url
-
+    repository_url = "https://github.com/krishnateja110192/Terraform"
     branch         = "main"
     events         = ["commit"]
 
-    # 👇 This block is REQUIRED (maps to SourceControlAuthProperties)
     authentication {
-      token      = var.context_access_token   # reuse the same PAT
+      token      = var.context_access_token
       token_type = "PAT"
     }
   }
@@ -50,4 +41,11 @@ resource "azurerm_container_registry_task" "build_and_push" {
   lifecycle {
     create_before_destroy = true
   }
+}
+resource "azurerm_container_registry_task_schedule_run_now" "initial_build" {
+  container_registry_task_id = azurerm_container_registry_task.build_and_push.id
+  depends_on                 = [azurerm_container_registry_task.build_and_push]
+
+  # Optional: force rerun when tag changes
+
 }
