@@ -7,7 +7,7 @@ data "archive_file" "app_archive" {
   type             = "tar.gz"
   source_dir       = var.app_content_dir
   output_file_mode = "0644"
-  output_path      = "${path.module}/${var.archive_file_name}"
+  output_path      = "${var.app_content_dir}/${var.archive_file_name}"
 }
 
 # Time resources for SAS start/expiry (valid for 24 hours)

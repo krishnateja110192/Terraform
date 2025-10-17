@@ -1,21 +1,16 @@
 variable "name_prefix" {
   description = "Prefix for all resource names."
   type        = string
-  default     = "cmtr-ey1bz94q-mod8b"
 }
 
 variable "location" {
   description = "The Azure region to deploy resources."
   type        = string
-  default     = "East US"
 }
 
 variable "tags" {
   description = "A mapping of tags to assign to the resources."
   type        = map(string)
-  default = {
-    Creator = "krishnateja_samudrala@epam.com"
-  }
 }
 
 variable "acr_sku" {

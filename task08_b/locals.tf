@@ -15,7 +15,7 @@ locals {
   aks_default_pool_name = "system"
 
   # Archive details
-  archive_source_dir = "${path.module}/application"
+  archive_source_dir = "application"
   archive_file_name  = "app-content.tar.gz"
 
   # ACR image and tag
