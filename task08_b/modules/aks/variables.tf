@@ -61,6 +61,5 @@ variable "tags" {
 variable "os_disk_size_gb" {
   type        = number
   description = "OS disk size (GiB) for the default node pool; must fit VM local disk if Ephemeral."
-  default     = 64
 }
 

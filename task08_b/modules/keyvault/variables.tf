@@ -26,18 +26,9 @@ variable "tags" {
 variable "sku_name" {
   description = "The Name of the SKU used for the Key Vault."
   type        = string
-  validation {
-    condition     = contains(["standard", "premium"], lower(var.sku_name))
-    error_message = "sku_name must be 'standard' or 'premium'."
-  }
 }
 
 variable "keyvault_name" {
   description = "The name of the Key Vault."
   type        = string
-  validation {
-    # 3-24 chars, alphanumerics and hyphens; must start with a letter
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{2,23}$", var.keyvault_name))
-    error_message = "Key Vault name must be 3–24 chars, start with a letter, and contain only letters, numbers, and hyphens."
-  }
 }

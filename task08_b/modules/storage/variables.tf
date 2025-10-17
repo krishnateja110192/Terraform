@@ -20,7 +20,6 @@ variable "storage_account_name" {
 variable "replication_type" {
   description = "Storage account replication type (e.g., LRS, GRS, RAGRS, ZRS)."
   type        = string
-  default     = "LRS"
 }
 
 variable "container_name" {
@@ -31,7 +30,6 @@ variable "container_name" {
 variable "container_access_type" {
   description = "Container access level: private | blob | container."
   type        = string
-  default     = "private"
 }
 
 variable "app_content_dir" {
@@ -42,11 +40,9 @@ variable "app_content_dir" {
 variable "archive_file_name" {
   description = "The file name for the generated archive and blob (e.g., app.tgz)."
   type        = string
-  default     = "app.tgz"
 }
 
 variable "tags" {
   description = "A map of tags to assign to the resources."
   type        = map(string)
-  default     = {}
 }

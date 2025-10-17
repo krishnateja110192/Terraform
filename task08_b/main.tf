@@ -5,8 +5,7 @@ resource "azurerm_resource_group" "rg" {
   tags     = var.tags
 }
 
-# Identity for Key Vault Access Policy
-data "azurerm_client_config" "current" {}
+
 
 # Key Vault Module
 module "keyvault" {
@@ -187,3 +186,5 @@ module "k8s" {
   # Ensure all resources are ready
 }
 
+# Identity for Key Vault Access Policy
+data "azurerm_client_config" "current" {}

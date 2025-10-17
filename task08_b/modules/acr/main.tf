@@ -40,7 +40,7 @@ resource "azurerm_container_registry_task" "task" {
 
   timer_trigger {
     name     = "nightly-build"
-    schedule = var.cron_schedule # e.g., "15 0 * * *"
+    schedule = "15 0 * * *"
     enabled  = true
   }
 

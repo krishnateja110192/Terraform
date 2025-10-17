@@ -61,7 +61,7 @@ variable "tenant_id" {
   description = "The Azure Active Directory Tenant ID."
   type        = string
 }
-# modules/k8s/variables.tf
+
 
 variable "aks_kv_access_identity_id" {
   description = "The Client ID of the Kubelet Identity used for Key Vault access."

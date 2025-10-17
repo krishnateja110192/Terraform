@@ -39,33 +39,22 @@ variable "redis_hostname_secret_name" {
 variable "tags" {
   description = "Tags to assign to the Container App."
   type        = map(string)
-  default     = {}
 }
 
 variable "keyvault_uri" {
   description = "HTTPS URI of the Key Vault (e.g., https://my-kv.vault.azure.net)."
   type        = string
-  validation {
-    condition     = can(regex("^https://[A-Za-z0-9-]+\\.vault\\.azure\\.net/?$", var.keyvault_uri))
-    error_message = "keyvault_uri must look like https://<name>.vault.azure.net"
-  }
 }
 
 variable "acr_login_server" {
   description = "The ACR login server (e.g., contoso.azurecr.io)."
   type        = string
-  validation {
-    condition     = can(regex("^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?\\.azurecr\\.io$", var.acr_login_server))
-    error_message = "acr_login_server must look like <name>.azurecr.io"
-  }
 }
 
 variable "image_tag" {
   description = "The tag for the Docker image."
   type        = string
-  default     = "latest"
 }
-# modules/aca/variables.tf
 
 variable "acr_resource_id" {
   description = "The Resource ID of the Azure Container Registry (ACR)."

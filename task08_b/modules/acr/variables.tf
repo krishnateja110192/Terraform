@@ -42,10 +42,3 @@ variable "tags" {
   description = "A mapping of tags to assign to the ACR."
   type        = map(string)
 }
-
-# variables.tf
-variable "cron_schedule" {
-  description = "CRON schedule for the ACR timer trigger (UTC). Example: '15 0 * * *' for 00:15 UTC daily."
-  type        = string
-  default     = "15 0 * * *"
-}
