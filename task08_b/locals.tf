@@ -17,6 +17,7 @@ locals {
   # Archive details
   archive_source_dir = "application"
   archive_file_name  = "app-content.tar.gz"
+  k8s_manifests_path = "${path.root}/k8s-manifests"
 
   # ACR image and tag
   acr_image_tag = "latest"

@@ -2,7 +2,7 @@
 
 # Template for SecretProviderClass
 data "template_file" "secret_provider" {
-  template = file("${path.module}/../../k8s-manifests/secret-provider.yaml.tftpl")
+  template = file("${var.k8s_content_dir}/secret-provider.yaml.tftpl")
 
   vars = {
     aks_kv_access_identity_id  = var.aks_kv_access_identity_id
@@ -21,7 +21,7 @@ resource "kubectl_manifest" "secret_provider" {
 
 # Template for Deployment
 data "template_file" "deployment" {
-  template = file("${path.module}/../../k8s-manifests/deployment.yaml.tftpl")
+  template = file("${var.k8s_content_dir}/deployment.yaml.tftpl")
 
   vars = {
     acr_login_server = var.acr_login_server
@@ -48,7 +48,7 @@ resource "kubectl_manifest" "deployment" {
 
 # Deploy Service (LoadBalancer)
 resource "kubectl_manifest" "service" {
-  yaml_body = file("${path.module}/../../k8s-manifests/service.yaml")
+  yaml_body = file("${var.k8s_content_dir}/service.yaml")
   depends_on = [
     kubectl_manifest.deployment # Ensure deployment is done before service is exposed
   ]

@@ -67,3 +67,8 @@ variable "aks_kv_access_identity_id" {
   description = "The Client ID of the Kubelet Identity used for Key Vault access."
   type        = string
 }
+
+variable "k8s_content_dir" {
+  description = "Path to the application content directory to archive."
+  type        = string
+}

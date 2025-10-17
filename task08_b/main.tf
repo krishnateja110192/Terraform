@@ -167,6 +167,7 @@ module "k8s" {
     kubernetes = kubernetes.aks
     kubectl    = kubectl.aks_kubectl # <-- This line is crucial
   }
+  k8s_content_dir            = local.k8s_manifests_path
   kube_config_raw            = module.aks.kube_config_raw
   client_certificate         = module.aks.kube_config.client_certificate
   client_key                 = module.aks.kube_config.client_key
