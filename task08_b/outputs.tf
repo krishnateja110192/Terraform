@@ -7,7 +7,7 @@ output "redis_fqdn" {
 
 output "aca_fqdn" {
   description = "Stable ingress FQDN for the Azure Container App."
-  value       = module.aca.fqdn
+  value       = module.aca.latest_revision_fqdn
 }
 
 
