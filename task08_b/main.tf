@@ -113,7 +113,14 @@ resource "azurerm_container_app_environment" "cae" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = var.tags
+
+  workload_profile {
+    name                  = "dedicated-env-profile"
+    workload_profile_type = "Consumption"
+  }
 }
+
+
 module "aca" {
   source = "./modules/aca"
 
