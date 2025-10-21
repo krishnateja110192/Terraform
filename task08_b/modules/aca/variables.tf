@@ -16,7 +16,7 @@ variable "container_app_environment_id" {
 
 
 variable "app_image_name" {
-  description = "The image repository/name in ACR (e.g., myapp/backend)."
+  description = "The image repository/name in ACR."
   type        = string
 }
 
