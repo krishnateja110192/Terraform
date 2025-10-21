@@ -115,7 +115,7 @@ resource "azurerm_container_app_environment" "cae" {
   tags                = var.tags
 
   workload_profile {
-    name                  = "dedicated-env-profile"
+    name                  = "Consumption"
     workload_profile_type = "Consumption"
   }
 }
