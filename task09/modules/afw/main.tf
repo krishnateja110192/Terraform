@@ -64,7 +64,7 @@ resource "azurerm_route_table" "rt" {
 
 # 6a) Default route to firewall (explicit depends_on)
 resource "azurerm_route" "aks_egress_to_afw" {
-  name                   = "aks-egress-to-afw"
+  name                   = local.aks_egress_to_afw_name
   resource_group_name    = var.resource_group_name
   route_table_name       = azurerm_route_table.rt.name
   address_prefix         = "0.0.0.0/0"
@@ -79,7 +79,7 @@ resource "azurerm_route" "aks_egress_to_afw" {
 }
 
 resource "azurerm_route" "aks_to_fw_pip_inet" {
-  name                = "to-fw-pip-internet"
+  name                = local.aks_to_fw_pip_inet_name
   resource_group_name = var.resource_group_name
   route_table_name    = azurerm_route_table.rt.name
 
@@ -176,7 +176,7 @@ resource "azurerm_firewall_application_rule_collection" "app_rc" {
 
 # 10a) App rules: AKS FQDN tag (optional but recommended)
 resource "azurerm_firewall_application_rule_collection" "app_rc_aks_tag" {
-  name                = "${local.app_rc_name}-aks-tag"
+  name                = local.app_rc_aks_tag_name
   azure_firewall_name = azurerm_firewall.afw.name
   resource_group_name = var.resource_group_name
   priority            = 290
